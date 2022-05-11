@@ -3,7 +3,8 @@ import cavity from '../../../assets/images/cavity.png'
 import fluoride from '../../../assets/images/fluoride.png'
 import whitening from '../../../assets/images/whitening.png'
 import Service from '../Service/Service';
-
+import treatment from '../../../assets/images/treatment.png'
+import CommonBtn from '../../Shared/CommonBtn';
 const Services = () => {
   const services =[
     {
@@ -39,6 +40,16 @@ const Services = () => {
            />)
       }
       </div>
+      <div className="hero min-h-screen mt-20 bg-white">
+  <div className="hero-content flex-col lg:flex-row">
+    <img src={treatment} className="max-w-md rounded-lg shadow-2xl" />
+    <div className='lg:pl-20'>
+      <h1 className="text-3xl font-bold">Exceptional Dental Care, on Your Terms</h1>
+      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+      <CommonBtn>get started</CommonBtn>
+    </div>
+  </div>
+</div>
     </div>
   );
 };

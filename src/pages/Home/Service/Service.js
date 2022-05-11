@@ -13,6 +13,7 @@ const Service = ({service}) => {
     <p>{description}</p>
   </div>
 </div>
+
     </div>
   );
 };
