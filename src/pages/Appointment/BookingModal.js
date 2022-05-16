@@ -2,15 +2,40 @@ import React from 'react';
 import { format } from 'date-fns';
 import auth from '../../Firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import {toast } from 'react-toastify';
 
 const BookingModal = ({ BookingModalData, date, setBookingModalData }) => {
   const [user, loading, error] = useAuthState(auth);
-
   const {_id, name, slots } = BookingModalData;
+
+  const formattedDate = format(date, 'PP')
   const HandleBooking =event =>{
     event.preventDefault()
     const slot = event.target.slot.value
-    console.log(_id, name, slot);
+    const booking ={
+      treatment_id: _id,
+      treatmentName: name,
+      date: formattedDate,
+      slot,
+      patient:user.email,
+      phone:event.target.phone.value,
+      patientName:user.displayName
+
+    }
+    fetch('http://localhost:5000/booking',{
+      method: 'POST',
+      headers:{
+        'content-Type': 'application/json'
+      },
+      body: JSON.stringify(booking)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      toast('data added to server')
+    })
+
+    // to close the modal 
     setBookingModalData(null)
   }
   return (
@@ -36,7 +61,7 @@ const BookingModal = ({ BookingModalData, date, setBookingModalData }) => {
 
             <input type="text"disabled value={user?.displayName ||''} className="input input-bordered input-sm w-full max-w-xs" />
             <input type="email" disabled value={user?.email ||''} className="input input-bordered input-sm w-full max-w-xs" />
-            <input type="text" placeholder="phone number" className="input input-bordered input-sm w-full max-w-xs" />
+            <input type="text" name='phone' placeholder="phone number" className="input input-bordered input-sm w-full max-w-xs" />
             <input type="submit" placeholder="submit" className="bg-primary input input-bordered input-sm w-full max-w-xs" />
           </form>
 
