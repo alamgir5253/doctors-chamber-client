@@ -13,7 +13,7 @@ const Booking = ({ booking,modaldata }) => {
           {slots.length} {slots.length > 1 ? <span>spaces</span> : <span>space</span>} Available
         </p>
         <div className="card-actions justify-center">
-          <label onClick={()=>modaldata(booking)} for="booking-modal"  disabled={slots.length === 0} className='btn btn-secondary  modal-button text-white bg-gradient-to-r from-primary to-secondary mt-4 font-bold'>Book Appointment</label>
+          <label onClick={()=>modaldata(booking)}htmlFor="booking-modal"  disabled={slots.length === 0} className='btn btn-secondary  modal-button text-white bg-gradient-to-r from-primary to-secondary mt-4 font-bold'>Book Appointment</label>
         </div>
       </div>
     </div>

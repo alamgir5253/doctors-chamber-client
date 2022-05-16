@@ -11,7 +11,7 @@ const modaldata = (booking, e)=>{
   setBookingModalData( booking)
 }
   useEffect(() => {
-    fetch('service.json')
+    fetch('http://localhost:5000/services')
       .then(res => res.json())
       .then(data => setAppointmentBooking(data))
   }, [])

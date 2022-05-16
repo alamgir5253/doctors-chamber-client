@@ -1,21 +1,26 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, NavLink } from 'react-router-dom';
+import auth from '../../../Firebase.init';
 
 const Navbar = () => {
+  const [user, loading, error] = useAuthState(auth);
   const NavItems = <>
   <li><NavLink className='rounded-md'  to='/'>Home</NavLink></li>
   <li><NavLink className='rounded-md'  to='/Appointment'>Appointment</NavLink></li>
   <li><NavLink className='rounded-md'  to='/reviews'>reviews</NavLink></li>
   <li><NavLink className='rounded-md'  to='/Contact Us'>Contact Us</NavLink></li>
   <li><NavLink className='rounded-md'  to='/About'>About</NavLink></li>
-  <li><NavLink className='rounded-md'  to='/Login'>Login</NavLink></li>
+  <li> {user ?<button className="btn btn-active btn-ghost" onClick={()=>signOut(auth)}>Sign Out</button>:<NavLink className='rounded-md'  to='/Login'>Login</NavLink>}</li>
+  <li><NavLink className='rounded-md'  to='/signup'>Sign Up</NavLink></li>
   
   
   </>
   return (
     <div>
-      <div className="navbar bg-base-100">
-  <div className="navbar-start">
+      <div className="navbar  bg-base-100">
+  <div className="navbar-start ">
     <div className="dropdown">
       <label tabIndex="0" className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
