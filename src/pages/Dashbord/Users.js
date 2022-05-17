@@ -4,14 +4,19 @@ import Loading from '../Shared/Loading';
 import UserRow from './UserRow';
 
 const Users = () => {
-  const {data, isLoading} = useQuery('users', ()=>fetch('http://localhost:5000/user').then(res =>res.json()))
+  const {data, isLoading, refetch} = useQuery('users', ()=>fetch('http://localhost:5000/user',{
+    method:'get',
+    headers:{
+      authorization: `bearer ${localStorage.getItem('accessToken')}`
+    }
+  }).then(res =>res.json()))
   if(isLoading){
     return<Loading />
   }
   return (
     <div>
-      <div class="overflow-x-auto">
-  <table class="table w-full">
+      <div className="overflow-x-auto">
+  <table className="table w-full">
     <thead>
       <tr>
         <th></th>
@@ -25,6 +30,7 @@ const Users = () => {
         data.map((user, index) => <UserRow
           key={user._id}
           index={index}
+          refetch={refetch}
           user={user}
           />)
       }
