@@ -19,9 +19,30 @@ const MyAppointment = () => {
   }
 
   return (
-    <div>
-      <h1>my appointment {appointment.length}</h1>
-    </div>
+    <div className="overflow-x-auto">
+  <table className="table  w-full">
+    <thead>
+      <tr>
+        <th   className='bg-secondary text-white text-md'>Name</th>
+        <th   className='bg-secondary text-white text-md'>Date</th>
+        <th   className='bg-secondary text-white text-md'>Time</th>
+        <th   className='bg-secondary text-white text-md'>Treatment</th>
+      </tr>
+    </thead>
+    <tbody>
+     {appointment.map((appoint, index) =>
+     <tr className='hover ' key={index}>
+        <th>{appoint.patientName}</th>
+        <th>{appoint.date}</th>
+        <th>{appoint.slot}</th>
+        <th>{appoint.treatmentName}</th>
+        
+      </tr>)}
+      
+    
+    </tbody>
+  </table>
+</div>
   );
 };
 

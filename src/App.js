@@ -3,7 +3,7 @@ import './App.css';
 import Navbar from './pages/Home/Header/Navbar';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home/Home/Home';
 import About from './pages/About/About';
 import Login from './pages/Login/Login';
@@ -13,6 +13,7 @@ import RequireAuth from './pages/Shared/RequireAuth';
 import Dashbord from './pages/Dashbord/Dashbord';
 import MyReview from './pages/Dashbord/MyReview';
 import MyAppointment from './pages/Dashbord/MyAppointment';
+import History from './pages/Dashbord/History';
 
 function App() {
   return (
@@ -29,14 +30,11 @@ function App() {
           </RequireAuth>
         }></Route>
 
-        <Route path='/dashboard' element={
-          <RequireAuth>
-            <Dashbord />
-          </RequireAuth>
-        }>
-            <Route index element={<MyAppointment />} />
-           <Route path='myreview' element={<MyReview />} />
-          
+        <Route path='/dashboard' element={<RequireAuth><Dashbord /></RequireAuth>}>
+          <Route index element={<MyAppointment />} />
+          <Route path='myreview' element={<MyReview />} />
+          <Route path='history' element={<History />} />
+
         </Route>
       </Routes>
       <ToastContainer />

@@ -4,12 +4,14 @@ import auth from '../../Firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../Hooks/UseToken';
 const SignUp = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth, {sendEmailVerification: true});
   const [updateProfile, updating, uperror] = useUpdateProfile(auth);
   const navigate = useNavigate()
   let location = useLocation()
+  let from = location.state?.from?.pathname || "/";
   // signInWithEmailAndPassword start 
   const [
     createUserWithEmailAndPassword,
@@ -17,6 +19,8 @@ const SignUp = () => {
     loading,
     error,
   ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+  const [token] = useToken(user || guser)
+
   if(loading || gloading ||updating){
     return <Loading></Loading>
   }
@@ -25,18 +29,16 @@ const SignUp = () => {
   if(error || gerror ||uperror)(
     errorMassage = <p className='text-red-700 text-sm font-bold'>{error?.message || gerror?.message ||uperror?.message}</p>
   )
-  if(user){
-    console.log(user)
+  if(token){
+    navigate(from, { replace: true });
+
   }
 
   
-let from = location.state?.from?.pathname || "/";
 
   const onSubmit = async data => {
-    console.log(data)
     await createUserWithEmailAndPassword(data.email, data.password)
     await updateProfile({ displayName: data.name});
-    navigate(from, { replace: true });
   };
   return (
     <div className=' flex justify-center h-screen items-center'>
