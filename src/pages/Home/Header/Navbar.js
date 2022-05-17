@@ -12,6 +12,9 @@ const Navbar = () => {
   <li><NavLink className='rounded-md'  to='/reviews'>reviews</NavLink></li>
   <li><NavLink className='rounded-md'  to='/Contact Us'>Contact Us</NavLink></li>
   <li><NavLink className='rounded-md'  to='/About'>About</NavLink></li>
+  
+  {user && <li><NavLink className='rounded-md'  to='/dashboard'>Dashboard</NavLink></li>}
+
   <li> {user ?<button className="btn btn-active btn-ghost" onClick={()=>signOut(auth)}>Sign Out</button>:<NavLink className='rounded-md'  to='/Login'>Login</NavLink>}</li>
   <li><NavLink className='rounded-md'  to='/signup'>Sign Up</NavLink></li>
   
@@ -32,6 +35,11 @@ const Navbar = () => {
       </ul>
     </div>
     <a className="btn btn-ghost normal-case text-xl"><Link to='/'>Doctors chamber</Link></a>
+  </div>
+  <div className='navbar-end'>
+  <label  for="dashboard-sidebar" tabIndex="1" className="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+      </label>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal gap-x-4">

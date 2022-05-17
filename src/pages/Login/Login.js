@@ -30,11 +30,11 @@ let from = location.state?.from?.pathname || "/";
     error,
   ] = useSignInWithEmailAndPassword(auth);
  
-  // useEffect(()=>{
-  //   if(guser){
-  //     navigate(from, { replace: true });
-  //   }
-  // },[])
+  useEffect(()=>{
+    if(user, guser){
+      navigate(from, { replace: true });
+    }
+  },[user, guser])
 
   if(loading || gloading || sending){
     return <Loading></Loading>
@@ -54,16 +54,16 @@ let from = location.state?.from?.pathname || "/";
   // }
   // redirect to page start 
 
-  const onSubmit = async data => {
+  const onSubmit =  data => {
     console.log(data)
-    await signInWithEmailAndPassword(data.email, data.password)
-    navigate(from, { replace: true });
+    signInWithEmailAndPassword(data.email, data.password)
+    // navigate(from, { replace: true });
   };
 
 
   return (
     <div className=' flex justify-center h-screen items-center'>
-      <div className="card max-w-96 -z-10 bg-base-100 shadow-xl">
+      <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="text-center font-bold">Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -72,6 +72,7 @@ let from = location.state?.from?.pathname || "/";
                 <span className="label-text">Enter Your Email</span>
                 
               </label>
+              <input type="text" />
               <input type="email"
                placeholder="email"
                 className="input input-bordered w-full max-w-xs"

@@ -25,18 +25,23 @@ const BookingModal = ({ BookingModalData, date, setBookingModalData }) => {
     fetch('http://localhost:5000/booking',{
       method: 'POST',
       headers:{
-        'content-Type': 'application/json'
+        'content-type': 'application/json'
       },
       body: JSON.stringify(booking)
     })
     .then(res => res.json())
     .then(data => {
       console.log(data);
-      toast('data added to server')
+     if(data.success){
+       toast(`appointment set ${formattedDate} at ${slot}`)
+     }else{
+      toast.error(`already set appointment  ${data.booking?.date} at ${data.booking?.slot}`)
+
+     }
+     // to close the modal 
+     setBookingModalData(null)
     })
 
-    // to close the modal 
-    setBookingModalData(null)
   }
   return (
     <div>
@@ -48,7 +53,7 @@ const BookingModal = ({ BookingModalData, date, setBookingModalData }) => {
           <h3 className="font-bold text-lg text-center mb-4 text-secondary">Appointment Booking For {name}</h3>
 
           <form onSubmit={HandleBooking} className='grid grid-cols-1 justify-items-center gap-2  '>
-            <input type="text" value={format(date, 'PP')} className="input input-bordered input-sm w-full max-w-xs" />
+            <input type="text" readOnly  value={format(date, 'PP')} className="input input-bordered input-sm w-full max-w-xs" />
 
             <select name='slot' className="select select-bordered select-sm w-full max-w-xs">
               {

@@ -10,6 +10,9 @@ import Login from './pages/Login/Login';
 import Appointment from './pages/Appointment/Appointment';
 import SignUp from './pages/SignUp/SignUp';
 import RequireAuth from './pages/Shared/RequireAuth';
+import Dashbord from './pages/Dashbord/Dashbord';
+import MyReview from './pages/Dashbord/MyReview';
+import MyAppointment from './pages/Dashbord/MyAppointment';
 
 function App() {
   return (
@@ -25,6 +28,16 @@ function App() {
             <Appointment />
           </RequireAuth>
         }></Route>
+
+        <Route path='/dashboard' element={
+          <RequireAuth>
+            <Dashbord />
+          </RequireAuth>
+        }>
+            <Route index element={<MyAppointment />} />
+           <Route path='myreview' element={<MyReview />} />
+          
+        </Route>
       </Routes>
       <ToastContainer />
     </div>
