@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../Firebase.init';
 import { useForm } from "react-hook-form";
@@ -20,6 +20,12 @@ const SignUp = () => {
     error,
   ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
   const [token] = useToken(user || guser)
+  useEffect(()=>{
+    if(token){
+      navigate(from, { replace: true });
+  
+    }
+  },[token])
 
   if(loading || gloading ||updating){
     return <Loading></Loading>
@@ -29,10 +35,7 @@ const SignUp = () => {
   if(error || gerror ||uperror)(
     errorMassage = <p className='text-red-700 text-sm font-bold'>{error?.message || gerror?.message ||uperror?.message}</p>
   )
-  if(token){
-    navigate(from, { replace: true });
-
-  }
+  
 
   
 

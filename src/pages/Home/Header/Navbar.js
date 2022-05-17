@@ -6,6 +6,10 @@ import auth from '../../../Firebase.init';
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
+  const handleSignOut = ()=>{
+    signOut(auth)
+    localStorage.removeItem('accessToken')
+  }
   const NavItems = <>
   <li><NavLink className='rounded-md'  to='/'>Home</NavLink></li>
   <li><NavLink className='rounded-md'  to='/Appointment'>Appointment</NavLink></li>
@@ -15,7 +19,7 @@ const Navbar = () => {
   
   {user && <li><NavLink className='rounded-md'  to='/dashboard'>Dashboard</NavLink></li>}
 
-  <li> {user ?<button className="btn btn-active btn-ghost" onClick={()=>signOut(auth)}>Sign Out</button>:<NavLink className='rounded-md'  to='/Login'>Login</NavLink>}</li>
+  <li> {user ?<button className="btn btn-active btn-ghost" onClick={handleSignOut}>Sign Out</button>:<NavLink className='rounded-md'  to='/Login'>Login</NavLink>}</li>
   <li><NavLink className='rounded-md'  to='/signup'>Sign Up</NavLink></li>
   
   

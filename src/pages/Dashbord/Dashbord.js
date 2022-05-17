@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import MyReview from './MyReview';
+
 
 const Dashbord = () => {
   return (
@@ -18,6 +18,7 @@ const Dashbord = () => {
       <li><Link to='/dashboard'>Hy Appointment</Link></li>
       <li><Link to='/dashboard/MyReview'>My Review</Link></li>
       <li><Link to='/dashboard/history'>History</Link></li>
+      <li><Link to='/dashboard/users'>All Users</Link></li>
     </ul>
   
   </div>

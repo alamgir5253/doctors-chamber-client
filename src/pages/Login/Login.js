@@ -30,12 +30,13 @@ let from = location.state?.from?.pathname || "/";
     loading,
     error,
   ] = useSignInWithEmailAndPassword(auth);
-  // const [token] = useToken(user || guser)
- 
+  const [token] = useToken(user || guser)
+  useEffect(()=>{
+    if(token){
+      navigate(from, { replace: true });
   
-    if(user || guser){
-      // navigate(from, { replace: true });
     }
+  },[token])
   
 
   if(loading || gloading || sending){
